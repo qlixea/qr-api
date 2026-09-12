@@ -6,7 +6,9 @@ return [
     'api_secret' => env('QLIXEA_API_SECRET', ''),
     'dashboard_url' => env('QLIXEA_DASHBOARD_URL', 'https://api.qlixea.com/dashboard'),
     
-    // ✅ URL CORRECTA: coincide con routes/api.php de api.qlixea.com
+    // Token maestro para el aprovisionamiento automático (solo se usa durante la instalación)
     'provisioning_master_token' => env('QLIXEA_PROVISIONING_MASTER_TOKEN', 'qlx_prov_8f7a9b2c4d6e1f3a5b7c9d0e2f4a6b8c'),
-    'provisioning_api_url' => 'https://api.qlixea.com/admin/provision',
+    
+    // ✅ AGREGAMOS '/api/' ANTES DE '/admin/provision'
+    'provisioning_api_url' => 'https://api.qlixea.com/api/admin/provision',
 ];
