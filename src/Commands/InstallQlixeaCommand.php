@@ -26,8 +26,9 @@ class InstallQlixeaCommand extends Command
         $this->info('⏳ Conectando con Qlixea Hub para aprovisionar tu proyecto...');
 
         // 3. Llamar a la API de Provisioning
+        // ✅ CORREGIDO: Enviamos el header 'x-provisioning-token' para que coincida con tu middleware
         $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . config('qlixea.provisioning_master_token'),
+            'x-provisioning-token' => config('qlixea.provisioning_master_token'),
             'Accept' => 'application/json',
         ])->post(config('qlixea.provisioning_api_url'), [
             'name' => $projectName,
@@ -48,7 +49,7 @@ class InstallQlixeaCommand extends Command
             $this->info('🔒 API Secret: ' . $data['api_secret']);
             $this->info('🔗 Webhook configurado en: ' . $data['webhook_url']);
             
-            $this->info(' Instalación completada. No olvides ejecutar: php artisan config:cache');
+            $this->info('🎉 Instalación completada. No olvides ejecutar: php artisan config:cache');
         } else {
             $this->error('❌ Error al conectar con Qlixea Hub:');
             $this->error($response->body());
